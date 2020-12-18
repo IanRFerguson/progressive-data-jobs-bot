@@ -87,18 +87,22 @@ def jobs2String(DF):
     """
 
     DF = DF[DF['Days'] <= 7]                                                    # Isolate postings in the last week
-    output = ""                                                                 # Empty string to append to
 
-    for row in DF.values:
-        # Format job details in string format
-        string = """
-        <b>{}</b> @ {}<br>
-        Posted on {} | <a href={} target=_blank>Link</a><br><br>
-        """.format(row[0], row[1], row[2], row[3])
+    if len(DF) == 0:
+        return "<b><i>No jobs posted in the last week</i></b><br>"
+    else:
+        output = ""                                                             # Empty string to append to
 
-        output += string                                                        # Append to string
+        for row in DF.values:
+            # Format job details in string format
+            string = """
+            <b>{}</b> @ {}<br>
+            Posted on {} | <a href={} target=_blank>Link</a><br><br>
+            """.format(row[0], row[1], row[2], row[3])
 
-    return output
+            output += string                                                    # Append to string
+
+        return output
 
 
 # ----------- Email Functions
